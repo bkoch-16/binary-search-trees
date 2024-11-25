@@ -12,20 +12,7 @@ class Tree {
     this.root = buildTree(array);
   }
 
-  visitNode(node) {
-    if (node.left !== null) {
-      this.visitNode(node.left);
-    }
-    if (node.right !== null) {
-      this.visitNode(node.right);
-    }
-    if (node.left === null && node.right === null) {
-      console.log("LEAF: " + node.data);
-    }
-  }
-
   insert(node = this.root, value) {
-    console.log("recursive");
     if (node === null) {
       return new Node(value);
     }
@@ -39,6 +26,30 @@ class Tree {
     }
     console.log(node.data);
     return node;
+  }
+
+  deleteItem(node = this.root, value) {
+    if (node === null) {
+      return;
+    }
+    if (node.data === value) {
+      if (node.right === null && node.left === null) {
+        return true;
+      }
+    }
+
+    const right = this.deleteItem(node.right, value);
+    if (right === true) {
+      console.log("FOUND");
+      node.right = null;
+      return;
+    }
+    const left = this.deleteItem(node.left, value);
+    if (left === true) {
+      this.left = null;
+      return;
+    }
+    console.log(this.root);
   }
 }
 
