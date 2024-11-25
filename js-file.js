@@ -7,9 +7,38 @@ class Node {
 }
 
 class Tree {
-  constructor(array, root) {
+  constructor(array) {
     this.array = array;
-    this.root = root;
+    this.root = buildTree(array);
+  }
+
+  visitNode(node) {
+    if (node.left !== null) {
+      this.visitNode(node.left);
+    }
+    if (node.right !== null) {
+      this.visitNode(node.right);
+    }
+    if (node.left === null && node.right === null) {
+      console.log("LEAF: " + node.data);
+    }
+  }
+
+  insert(node = this.root, value) {
+    console.log("recursive");
+    if (node === null) {
+      return new Node(value);
+    }
+    if (node.data === value) {
+      return node;
+    }
+    if (node.data < value) {
+      node.right = this.insert(node.right, value);
+    } else {
+      node.left = this.insert(node.left, value);
+    }
+    console.log(node.data);
+    return node;
   }
 }
 
@@ -103,7 +132,7 @@ const array = sortAndRemoveDupe([
 ]);
 
 const root = buildTree(array);
-const test = new Tree(array, root);
+const test = new Tree(array);
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
