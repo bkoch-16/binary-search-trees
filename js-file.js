@@ -34,20 +34,37 @@ class Tree {
     }
     if (node.data === value) {
       if (node.right === null && node.left === null) {
-        return true;
+        return "leaf";
+      } else if (
+        (node.right !== null && node.left === null) ||
+        (node.right === null && node.left !== null)
+      ) {
+        return "skip";
       }
     }
 
     const right = this.deleteItem(node.right, value);
-    if (right === true) {
+    if (right === "leaf") {
       console.log("FOUND");
       node.right = null;
       return;
+    } else if (right === "skip") {
+      if (node.right.right !== null) {
+        node.right = node.right.right;
+      } else {
+        node.right = node.right.left;
+      }
     }
     const left = this.deleteItem(node.left, value);
-    if (left === true) {
+    if (left === "leaf") {
       this.left = null;
       return;
+    } else if (left === "skip") {
+      if (node.left.left !== null) {
+        node.left = node.left.left;
+      } else {
+        node.left = node.left.right;
+      }
     }
     console.log(this.root);
   }
