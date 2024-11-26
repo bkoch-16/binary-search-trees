@@ -39,16 +39,23 @@ class Tree {
         (node.right !== null && node.left === null) ||
         (node.right === null && node.left !== null)
       ) {
-        return "skip";
+        return "singleChild";
+      } else {
+        let tmp = node.right;
+        while (tmp.left !== null) {
+          tmp = tmp.left;
+        }
+        node.data = tmp.data;
+        tmp.data = value;
+        this.deleteItem(node, value);
       }
     }
 
     const right = this.deleteItem(node.right, value);
     if (right === "leaf") {
-      console.log("FOUND");
       node.right = null;
       return;
-    } else if (right === "skip") {
+    } else if (right === "singleChild") {
       if (node.right.right !== null) {
         node.right = node.right.right;
       } else {
@@ -59,14 +66,13 @@ class Tree {
     if (left === "leaf") {
       this.left = null;
       return;
-    } else if (left === "skip") {
+    } else if (left === "singleChild") {
       if (node.left.left !== null) {
         node.left = node.left.left;
       } else {
         node.left = node.left.right;
       }
     }
-    console.log(this.root);
   }
 }
 
