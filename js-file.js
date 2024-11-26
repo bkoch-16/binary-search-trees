@@ -103,8 +103,50 @@ class Tree {
 
     return null;
   }
+
+  levelOrder(callback) {}
 }
 
+class Queue {
+  constructor() {
+    this.items = [];
+  }
+
+  enqueue(element) {
+    this.items.push(element);
+  }
+
+  dequeue() {
+    if (this.isEmpty()) {
+      return "Empty";
+    }
+
+    return this.items.shift();
+  }
+
+  front() {
+    if (this.isEmpty()) {
+      return "No elements in queue";
+    }
+    return this.items[0];
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  printQueue() {
+    var string = "";
+    for (let i = 0; i < this.items.length; i++) {
+      string += this.items[i] + " ";
+    }
+    return string;
+  }
+}
 function sortAndRemoveDupe(array) {
   const sortedArray = mergeSort(array);
   for (let i = 0; i < sortedArray.length; i++) {
