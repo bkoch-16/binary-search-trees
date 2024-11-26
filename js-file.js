@@ -74,6 +74,35 @@ class Tree {
       }
     }
   }
+
+  find(node = this.root, value) {
+    if (node === null) {
+      return;
+    }
+
+    if (node.data === this.root.data) {
+      if (value > node.data) {
+        node = node.right;
+      } else {
+        node = node.left;
+      }
+    }
+
+    if (value === node.data) {
+      return node;
+    }
+
+    const right = this.find(node.right, value);
+    if (typeof right === "object") {
+      return right;
+    }
+    const left = this.find(node.left, value);
+    if (typeof left === "object") {
+      return left;
+    }
+
+    return null;
+  }
 }
 
 function sortAndRemoveDupe(array) {
