@@ -236,6 +236,14 @@ class Tree {
       }
     }
   }
+
+  rebalance(tree) {
+    const newInput = [];
+    tree.inOrder((node) => newInput.push(node.data));
+    console.log(newInput);
+    this.array = newInput;
+    this.root = buildTree(newInput);
+  }
 }
 
 class Queue {
