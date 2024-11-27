@@ -209,6 +209,33 @@ class Tree {
       return right + 1;
     }
   }
+
+  isBalanced(node = this.root) {
+    if (node === null) {
+      return true;
+    }
+
+    const left = this.height(node.left);
+    const right = this.height(node.right);
+
+    if (Math.abs(left - right) > 1) {
+      return false;
+    } else {
+      const leftBal = this.isBalanced(node.left);
+      if (leftBal === false) {
+        return false;
+      }
+
+      const rightBal = this.isBalanced(node.right);
+      if (rightBal === false) {
+        return false;
+      }
+
+      if (leftBal === true && rightBal === true) {
+        return true;
+      }
+    }
+  }
 }
 
 class Queue {
