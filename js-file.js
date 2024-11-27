@@ -24,7 +24,6 @@ class Tree {
     } else {
       node.left = this.insert(node.left, value);
     }
-    console.log(node.data);
     return node;
   }
 
@@ -178,6 +177,20 @@ class Tree {
     };
 
     traverse(this.root);
+  }
+
+  height(node) {
+    if (node === null) {
+      return -1;
+    }
+    if (node.left === null && node.right === null) {
+      return 0;
+    }
+    const left = this.height(node.left);
+    const right = this.height(node.right);
+    if (left >= right) {
+      return left + 1;
+    } else return right + 1;
   }
 }
 
