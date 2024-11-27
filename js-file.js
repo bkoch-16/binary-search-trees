@@ -121,6 +121,64 @@ class Tree {
       callback(queue.dequeue());
     }
   }
+
+  inOrder(callback) {
+    if (!callback) {
+      throw new Error("Callback is required!");
+    }
+
+    const traverse = (node) => {
+      if (!node) {
+        return;
+      }
+
+      traverse(node.left);
+
+      callback(node);
+
+      traverse(node.right);
+    };
+
+    traverse(this.root);
+  }
+
+  preOrder(callback) {
+    if (!callback) {
+      throw new Error("Callback is required!");
+    }
+
+    const traverse = (node) => {
+      if (!node) {
+        return;
+      }
+
+      callback(node);
+
+      traverse(node.left);
+      traverse(node.right);
+    };
+
+    traverse(this.root);
+  }
+
+  postOrder(callback) {
+    if (!callback) {
+      throw new Error("Callback is required!");
+    }
+
+    const traverse = (node) => {
+      if (!node) {
+        return;
+      }
+
+      traverse(node.left);
+      traverse(node.right);
+
+      callback(node);
+    };
+
+    traverse(this.root);
+  }
 }
 
 class Queue {
