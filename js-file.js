@@ -372,11 +372,26 @@ function mergeSort(array) {
 }
 
 const array = sortAndRemoveDupe([
-  1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
+  1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 55, 44, 33, 22, 5, 14, 88, 33,
 ]);
 
 const root = buildTree(array);
 const test = new Tree(array);
+
+console.log(test.isBalanced());
+console.log(test.levelOrder((node) => console.log(node.data)));
+console.log(test.preOrder((node) => console.log(node.data)));
+console.log(test.postOrder((node) => console.log(node.data)));
+console.log(test.inOrder((node) => console.log(node.data)));
+test.insert(test.root, 111);
+test.insert(test.root, 211);
+console.log(test.isBalanced());
+test.rebalance(test);
+console.log(test.isBalanced());
+console.log(test.levelOrder((node) => console.log(node.data)));
+console.log(test.preOrder((node) => console.log(node.data)));
+console.log(test.postOrder((node) => console.log(node.data)));
+console.log(test.inOrder((node) => console.log(node.data)));
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -391,4 +406,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-prettyPrint(root);
+prettyPrint(test.root);
