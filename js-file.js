@@ -192,6 +192,23 @@ class Tree {
       return left + 1;
     } else return right + 1;
   }
+
+  depth(node, topNode = this.root) {
+    if (topNode === null) {
+      return;
+    }
+    if (node === topNode) {
+      return 0;
+    }
+    const left = this.depth(node, topNode.left);
+    if (typeof left === "number") {
+      return left + 1;
+    }
+    const right = this.depth(node, topNode.right);
+    if (typeof right === "number") {
+      return right + 1;
+    }
+  }
 }
 
 class Queue {
