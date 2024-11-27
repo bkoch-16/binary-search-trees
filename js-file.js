@@ -104,7 +104,23 @@ class Tree {
     return null;
   }
 
-  levelOrder(callback) {}
+  levelOrder(callback) {
+    if (!callback) {
+      throw new Error("Callback is required!");
+    }
+    const queue = new Queue();
+    queue.enqueue(this.root);
+
+    while (queue.size() > 0) {
+      if (queue.front().left !== null) {
+        queue.enqueue(queue.front().left);
+      }
+      if (queue.front().right !== null) {
+        queue.enqueue(queue.front().right);
+      }
+      callback(queue.dequeue());
+    }
+  }
 }
 
 class Queue {
